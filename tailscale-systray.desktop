@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=TailscaleSystray
+Version=1.0
+Exec=python3 /usr/share/tailscale-systray/tailscale_systray.py
+Icon=/usr/share/tailscale-systray/tailscale-logo-blue.png
