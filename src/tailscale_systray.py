@@ -27,7 +27,7 @@ class TailscaleInterface:
         self.menu = Gtk.Menu()
 
         # Exit Node Enabled Toggle
-        exit_node_enabled_item = Gtk.CheckMenuItem("Enable Exit Node")
+        exit_node_enabled_item = Gtk.CheckMenuItem(label="Enable Exit Node")
         exit_node_enabled_item.set_active(self.exit_node_enabled)
         exit_node_enabled_item.connect("toggled", self.toggle_exit_node)
         self.menu.append(exit_node_enabled_item)
@@ -43,11 +43,11 @@ class TailscaleInterface:
             self.exit_nodes_menu.append(menu_item)
 
 
-        exit_nodes_item = Gtk.MenuItem("Exit Nodes")
+        exit_nodes_item = Gtk.MenuItem(label="Exit Nodes")
         exit_nodes_item.set_submenu(self.exit_nodes_menu)
         self.menu.append(exit_nodes_item)
 
-        quit_item = Gtk.MenuItem("Quit")
+        quit_item = Gtk.MenuItem(label="Quit")
         quit_item.connect("activate", Gtk.main_quit)
         self.menu.append(quit_item)
 
