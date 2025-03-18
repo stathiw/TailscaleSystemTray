@@ -18,6 +18,9 @@ class InstallScripts(Command):
 
     def run(self):
         print('Installing tailscale-systray')
+
+        subprocess.run(["sudo", "apt", "update"])
+        subprocess.run(["sudo", "apt", "install", "-y", "libappindicator3-dev", "gir1.2-appindicator3-0.1"])
         
         # Install at /usr/share/tailscale-systray
         install_dir = "/usr/share/tailscale-systray"
