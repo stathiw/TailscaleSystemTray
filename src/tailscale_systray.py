@@ -5,8 +5,8 @@ import json
 from threading import Thread
 import gi
 gi.require_version('Gtk', '3.0')
-gi.require_version('AppIndicator3', '0.1')
-from gi.repository import Gtk, AppIndicator3, GLib
+gi.require_version('AyatanaAppIndicator3', '0.1')
+from gi.repository import Gtk, AyatanaAppIndicator3 as AppIndicator3, GLib
 
 class TailscaleInterface:
     def __init__(self):
@@ -119,6 +119,7 @@ class TailscaleInterface:
                     if node_info.get('ExitNodeOption', False):
                         exit_node_hosts.append(node_info.get('HostName'))
                 return exit_node_hosts
+            return []
         except Exception as e:
             print(e)
             return []
