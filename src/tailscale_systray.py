@@ -128,12 +128,17 @@ class TailscaleInterface:
     def toggle_exit_node(self, toggled):
         if self._syncing_exit_node:
             return
-        self.exit_node_enabled = not self.exit_node_enabled
-        if not self.exit_node_enabled:
-            subprocess.run(["tailscale", "set", "--exit-node", ""])
+        new_state = toggled.get_active()
+        if new_state:
+            node = self.get_selected_exit_node()
+            if not node:
+                self._sync_menu_item(self.exit_node_toggle, False, "_syncing_exit_node")
+                return
+            self.exit_node_enabled = True
+            Thread(target=lambda: subprocess.run(["tailscale", "set", "--exit-node", node]), daemon=True).start()
         else:
-            self.selected_exit_node = self.get_selected_exit_node()
-            subprocess.run(["tailscale", "set", "--exit-node", self.selected_exit_node])
+            self.exit_node_enabled = False
+            Thread(target=lambda: subprocess.run(["tailscale", "set", "--exit-node", ""]), daemon=True).start()
 
     def get_selected_exit_node(self):
         for menu_item in self.exit_nodes_menu.get_children():
